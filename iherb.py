@@ -63,12 +63,13 @@ if __name__ == '__main__':
 	csv = helper.readFile('iherb.csv')
 	if csv != '':
 		rowArr = csv.split('\n')
-		for row in xrange(1, len(rowArr)):
-			a = row.split(',')
-			result.append(User(a[0], a[1], a[2], a[3], a[4]))
+		for row in range(1, len(rowArr)):
+			a = rowArr[row].split(',')
+			if len(a) == 5:
+				result.append(User(a[0], a[1], a[2], a[3], a[4]))
 
-	for page in xrange(1, 36):
-		url = 'https://bbs.iherb.com/forum.php?mod=forumdisplay&fid=61&filter=author&orderby=dateline&page=' + str(page)
+	for page in range(1, 45):
+		url = 'https://bbs.iherb.com/forum.php?mod=forumdisplay&fid=44&orderby=dateline&orderby=dateline&filter=author&page=' + str(page)
 		pq = helper.get(url)
 		topicAArr = pq('.xst')
 		for topic in topicAArr:
@@ -76,4 +77,5 @@ if __name__ == '__main__':
 			csv = 'name,numTopic,numPost,numPoint,title\n'
 			for u in result:
 				csv += u.toCSV() + '\n'
-			helper.writeFile(csv.encode('utf-8'), 'iherb.csv')
+			# helper.writeFile(csv.encode('utf-8'), 'iherb.csv')
+			helper.writeFile(csv, 'iherb.csv')

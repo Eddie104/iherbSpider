@@ -19,7 +19,7 @@ def mkDir(path):
 
 def writeFile(content, path):
 	try:
-		f = open(path, 'wb')
+		f = open(path, 'w')
 		f.write(content)
 		f.close()
 		return True
@@ -29,7 +29,7 @@ def writeFile(content, path):
 
 def readFile(path):
 	try:
-		f = open(path, 'rb')
+		f = open(path, 'r')
 		text = f.read()
 		f.close()
 		return text
